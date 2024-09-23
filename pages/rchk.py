@@ -7,9 +7,15 @@ from tkinter import filedialog
 from st_aggrid import AgGrid, GridOptionsBuilder, ColumnsAutoSizeMode
 from streamlit_navigation_bar import st_navbar
 
+import os
 
+if os.environ.get('DISPLAY','') == '':
+    print('no display found. Using :0.0')
+    os.environ.__setitem__('DISPLAY', ':0.0')
+
+setting = os.environ.__getitem__('DISPLAY')
 #------------------------------------ Set up tkinter ----------
-root = tk.Tk()
+root = tk.Tk(screenName = setting)
 root.withdraw()
 
 # Make folder picker dialog appear on top of other windows
